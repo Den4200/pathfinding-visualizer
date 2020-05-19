@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+pre-commit = "*"
+
+[packages]
+arcade = "~=2.3"
+
+[scripts]
+lint = "python -m flake8"
+precommit = "pre-commit install"
+start = "python -m astar"
