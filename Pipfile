@@ -9,6 +9,7 @@ pre-commit = "*"
 
 [packages]
 arcade = "~=2.3"
+arcade-ui = "*"
 
 [scripts]
 lint = "python -m flake8"

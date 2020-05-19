@@ -1,7 +1,6 @@
 class Settings:
     WINDOW_SIZE = (1280, 720)
-    SCALING = 2
-    MAP_SIZE = (20, 20)
+    SCALING = 1
 
 
 class Tile:

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1103d7ec48e10b8663162735f4f1b32681ef4da5ac689aa22768eba74b7b1590"
+            "sha256": "6e1eb46a62e44339fb635bf0cfdd1ef8e80a1201d6ce7e4ed068535bf00aa4cd"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -20,6 +20,14 @@
             ],
             "index": "pypi",
             "version": "==2.3.15"
+        },
+        "arcade-ui": {
+            "hashes": [
+                "sha256:4a48e656c8b2d5a27344c363dfc87f09008a6730235af4bf1e8eace410305e8b",
+                "sha256:f0559fa64e11608ae5b276626fea1521b3d0bd832152fdbebf2f714b5cea4690"
+            ],
+            "index": "pypi",
+            "version": "==0.0.2"
         },
         "attrs": {
             "hashes": [
