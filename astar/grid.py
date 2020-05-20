@@ -61,7 +61,7 @@ class Grid(InteractiveWidget):
         )
 
     def move(self, delta_x: float, delta_y: float) -> None:
-        pass
+        raise NotImplementedError
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int) -> None:
         if self.active:
