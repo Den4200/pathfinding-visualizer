@@ -71,6 +71,5 @@ class Grid(InteractiveWidget):
 
             elif self.should_break:
                 if box is not None:
-                    print(center_x, center_y)
                     self.filled.remove(box)
                     self.hash_map.pop((center_x, center_y))
