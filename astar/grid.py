@@ -132,19 +132,19 @@ class Grid(InteractiveWidget):
             except StopIteration:
                 self.find = None
                 self.found = False
-                return
 
-            color = arcade.color.YELLOW if not self.found \
-                else arcade.color.GREEN
+            else:
+                color = arcade.color.YELLOW if not self.found \
+                    else arcade.color.GREEN
 
-            center_x, center_y = tile_to_pixels(*pos)
+                center_x, center_y = tile_to_pixels(*pos)
 
-            self.filled.append(
-                arcade.create_rectangle_filled(
-                    center_x=center_x,
-                    center_y=center_y,
-                    width=Tile.SCALED,
-                    height=Tile.SCALED,
-                    color=color
+                self.filled.append(
+                    arcade.create_rectangle_filled(
+                        center_x=center_x,
+                        center_y=center_y,
+                        width=Tile.SCALED,
+                        height=Tile.SCALED,
+                        color=color
+                    )
                 )
-            )
