@@ -24,7 +24,6 @@ class Grid(InteractiveWidget):
         self.pathfinder = PathFinder()
         self.find = None
         self.found = False
-        self._delta_time = 0
 
     def setup(self) -> None:
         for y in range(0, s.WINDOW_SIZE[1], Tile.SCALED):
@@ -116,40 +115,36 @@ class Grid(InteractiveWidget):
 
     def on_update(self, delta_time: float) -> None:
         if self.find is not None:
-            self._delta_time += delta_time
 
-            if self._delta_time > 0.01:
-                try:
-                    n = next(self.find)
+            try:
+                n = next(self.find)
 
-                    if isinstance(n, Node):
-                        pos = n.pos
+                if isinstance(n, Node):
+                    pos = n.pos
 
-                    elif n == 0:
-                        self.found = True
-                        return
-
-                    elif self.found:
-                        pos = n
-
-                except StopIteration:
-                    self.find = None
-                    self.found = False
+                elif n == 0:
+                    self.found = True
                     return
 
-                color = arcade.color.YELLOW if not self.found \
-                    else arcade.color.GREEN
+                elif self.found:
+                    pos = n
 
-                center_x, center_y = tile_to_pixels(*pos)
+            except StopIteration:
+                self.find = None
+                self.found = False
+                return
 
-                self.filled.append(
-                    arcade.create_rectangle_filled(
-                        center_x=center_x,
-                        center_y=center_y,
-                        width=Tile.SCALED,
-                        height=Tile.SCALED,
-                        color=color
-                    )
+            color = arcade.color.YELLOW if not self.found \
+                else arcade.color.GREEN
+
+            center_x, center_y = tile_to_pixels(*pos)
+
+            self.filled.append(
+                arcade.create_rectangle_filled(
+                    center_x=center_x,
+                    center_y=center_y,
+                    width=Tile.SCALED,
+                    height=Tile.SCALED,
+                    color=color
                 )
-
-                self._delta_time = 0
+            )
