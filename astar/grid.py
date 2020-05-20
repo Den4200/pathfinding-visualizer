@@ -109,6 +109,11 @@ class Grid(InteractiveWidget):
                 self.boxes_hash_map
             )
 
+        if key == arcade.key.ESCAPE and self.find is None:
+            self.filled = arcade.ShapeElementList()
+            self.filled_hash_map.clear()
+            self.active = True
+
     def on_update(self, delta_time: float) -> None:
         if self.find is not None:
             self._delta_time += delta_time
