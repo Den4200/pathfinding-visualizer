@@ -51,7 +51,7 @@ class Node:
 
 class PathFinder:
 
-    def __init__(self, max_tries: int = 300) -> None:
+    def __init__(self, max_tries: int = 1000) -> None:
         self.max_tries = max_tries
 
     def find(
@@ -100,7 +100,7 @@ class PathFinder:
                     path.append(current.pos)
                     current = current.parent
 
-                yield from reversed(path)
+                return reversed(path)
 
             children = (
                 current_node + pos_node for pos_node in surroundings
@@ -126,13 +126,17 @@ class PathFinder:
 
                 open_nodes.add(child)
 
+                yield child
+
     @staticmethod
     def _tile_is_blocked(x: int, y: int, sprite_list: arcade.SpriteList) -> bool:
-        if x < 0 or x > s.MAP_SIZE[0] or y < 0 or y > s.MAP_SIZE[1]:
+        cx, cy = tile_to_pixels(x, y)
+
+        if cx < 0 or cx > s.WINDOW_SIZE[0] or cy < 0 or cy > s.WINDOW_SIZE[1]:
             return True
 
         blocking_sprites = arcade.get_sprites_at_exact_point(
-            tile_to_pixels(x, y),
+            (cx, cy),
             sprite_list
         )
 
