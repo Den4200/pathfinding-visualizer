@@ -61,11 +61,9 @@ class PathFinder:
     ) -> Iterator[Union[Tuple[int, int], int]]:
 
         if self._tile_is_blocked(*end_pos, collision_list_hash_map):
-            print(1)
             return
 
         if not self._tile_is_blocked(*end_pos, map_list_hash_map):
-            print(2)
             return
 
         open_nodes = set()
