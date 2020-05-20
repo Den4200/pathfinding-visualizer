@@ -6,7 +6,7 @@ from astar.views import LoadingView
 
 
 def main() -> None:
-    window = arcade.Window(*s.WINDOW_SIZE)
+    window = arcade.Window(*s.WINDOW_SIZE, 'A* Pathfinding Visualization')
     window.show_view(LoadingView(EventMap()))
     arcade.run()
 
