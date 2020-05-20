@@ -4,5 +4,5 @@ class Settings:
 
 
 class Tile:
-    SIZE = 16
+    SIZE = 32
     SCALED = SIZE * Settings.SCALING

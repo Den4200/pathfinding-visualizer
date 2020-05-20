@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple, Iterator
+from typing import Any, Dict, Optional, Tuple, Iterator
 
-import arcade
-
-from astar import Settings as s
-from astar.utils import tile_to_pixels
+from astar import Settings as s, Tile
+from astar.utils import check_point_for_collision, tile_to_pixels
 
 
 class Node:
@@ -58,14 +56,16 @@ class PathFinder:
         self,
         start_pos: Tuple[int, int],
         end_pos: Tuple[int, int],
-        collision_list: arcade.SpriteList,
-        map_list: arcade.SpriteList
+        collision_list_hash_map: Dict[Tuple[float, float], Any],
+        map_list_hash_map: Dict[Tuple[float, float], Any]
     ) -> Iterator[Tuple[int, int]]:
 
-        if self._tile_is_blocked(*end_pos, collision_list):
+        if self._tile_is_blocked(*end_pos, collision_list_hash_map):
+            print(1)
             return
 
-        if not self._tile_is_blocked(*end_pos, map_list):
+        if not self._tile_is_blocked(*end_pos, map_list_hash_map):
+            print(2)
             return
 
         open_nodes = set()
@@ -93,18 +93,20 @@ class PathFinder:
             closed_nodes.add(current_node)
 
             if current_node == end_node:
-                path = []
+                yield 0
 
+                path = []
                 current = current_node
                 while current is not None:
                     path.append(current.pos)
                     current = current.parent
 
-                return reversed(path)
+                yield from reversed(path)
+                return
 
             children = (
                 current_node + pos_node for pos_node in surroundings
-                if not self._tile_is_blocked(*(current_node + pos_node).pos, collision_list)
+                if not self._tile_is_blocked(*(current_node + pos_node).pos, collision_list_hash_map)
             )
 
             for child in children:
@@ -125,19 +127,25 @@ class PathFinder:
                         continue
 
                 open_nodes.add(child)
-
                 yield child
 
     @staticmethod
-    def _tile_is_blocked(x: int, y: int, sprite_list: arcade.SpriteList) -> bool:
+    def _tile_is_blocked(x: int, y: int, element_list_hash_map: Dict[Tuple[float, float], Any]) -> bool:
         cx, cy = tile_to_pixels(x, y)
 
         if cx < 0 or cx > s.WINDOW_SIZE[0] or cy < 0 or cy > s.WINDOW_SIZE[1]:
             return True
 
-        blocking_sprites = arcade.get_sprites_at_exact_point(
-            (cx, cy),
-            sprite_list
-        )
+        half_tile = Tile.SCALED / 2
 
-        return len(blocking_sprites) > 0
+        for elem in element_list_hash_map:
+            if check_point_for_collision(
+                (cx, cy),
+                elem[0] - half_tile,
+                elem[0] + half_tile,
+                elem[1] - half_tile,
+                elem[1] + half_tile
+            ):
+                return True
+
+        return False

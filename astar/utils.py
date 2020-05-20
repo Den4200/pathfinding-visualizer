@@ -25,3 +25,15 @@ def find_grid_box(x, y):
     center_y = bottom_y + Tile.SCALED / 2
 
     return center_x, center_y
+
+
+def check_point_for_collision(
+    point: Tuple[float, float],
+    left: float,
+    right: float,
+    bottom: float,
+    top: float
+) -> bool:
+    if left < point[0] < right and bottom < point[1] < top:
+        return True
+    return False
