@@ -96,14 +96,15 @@ class Grid(InteractiveWidget):
                     self.filled.remove(box)
                     self.filled_hash_map.pop((center_x, center_y))
 
-    def find_path(self) -> None:
-        self.active = False
-        self.find = self.pathfinder.find(
-            (3, 3),
-            (20, 20),
-            self.filled_hash_map,
-            self.boxes_hash_map
-        )
+    def on_key_press(self, key: int, modifiers: int) -> None:
+        if key == arcade.key.ENTER and self.find is None:
+            self.active = False
+            self.find = self.pathfinder.find(
+                (3, 3),
+                (20, 20),
+                self.filled_hash_map,
+                self.boxes_hash_map
+            )
 
     def on_update(self, delta_time: float) -> None:
         if self.find is not None:
