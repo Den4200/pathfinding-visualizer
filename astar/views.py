@@ -44,15 +44,19 @@ class LoadingView(View):
             center_x=s.WINDOW_SIZE[0] / 2,
             center_y=s.WINDOW_SIZE[1] / 2 + 50,
             width=400,
-            height=60
+            height=60,
+            font_size=24,
+            border_width=3
         )
 
         self.loading_text = TextBox(
-            text='Loading..',
+            text='Building grid..',
             center_x=s.WINDOW_SIZE[0] / 2,
             center_y=s.WINDOW_SIZE[1] / 2 - 50,
-            width=100,
-            height=30
+            width=160,
+            height=50,
+            font_size=16,
+            border_width=3
         )
 
         self.grid = Grid()
