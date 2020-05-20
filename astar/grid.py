@@ -56,7 +56,7 @@ class Grid(InteractiveWidget):
         )
 
         arcade.draw_rectangle_filled(
-            *tile_to_pixels(20, 20),
+            *tile_to_pixels(36, 19),
             width=Tile.SCALED,
             height=Tile.SCALED,
             color=arcade.color.BLACK
@@ -103,7 +103,7 @@ class Grid(InteractiveWidget):
             self.active = False
             self.find = self.pathfinder.find(
                 (3, 3),
-                (20, 20),
+                (36, 19),
                 self.filled_hash_map,
                 self.boxes_hash_map
             )
