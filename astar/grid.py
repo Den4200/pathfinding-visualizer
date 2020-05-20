@@ -17,6 +17,16 @@ class Grid(InteractiveWidget):
         self.filled = arcade.ShapeElementList()
         self.filled_hash_map = dict()
 
+        self.active = True
+        self.should_place = False
+        self.should_break = False
+
+        self.pathfinder = PathFinder()
+        self.find = None
+        self.found = False
+        self._delta_time = 0
+
+    def setup(self) -> None:
         for y in range(0, s.WINDOW_SIZE[1], Tile.SCALED):
             for x in range(0, s.WINDOW_SIZE[0], Tile.SCALED):
                 center_x, center_y = find_grid_box(x, y)
@@ -31,14 +41,7 @@ class Grid(InteractiveWidget):
                 self.boxes.append(box)
                 self.boxes_hash_map[(center_x, center_y)] = box
 
-        self.active = True
-        self.should_place = False
-        self.should_break = False
-
-        self.pathfinder = PathFinder()
-        self.find = None
-        self.found = False
-        self._delta_time = 0
+                yield
 
     def draw(self) -> None:
         if len(self.filled) > 0:
