@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Optional, Tuple, Iterator
+from typing import Any, Dict, Optional, Tuple, Iterator, Union
 
 from astar import Settings as s, Tile
 from astar.utils import check_point_for_collision, tile_to_pixels
@@ -22,7 +22,7 @@ class Node:
         self.g = 0
         self.h = 0
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.pos)
 
     def __eq__(self, other: Node) -> bool:
@@ -49,7 +49,7 @@ class Node:
 
 class PathFinder:
 
-    def __init__(self, max_tries: int = 1000) -> None:
+    def __init__(self, max_tries: int = 5000) -> None:
         self.max_tries = max_tries
 
     def find(
@@ -58,7 +58,7 @@ class PathFinder:
         end_pos: Tuple[int, int],
         collision_list_hash_map: Dict[Tuple[float, float], Any],
         map_list_hash_map: Dict[Tuple[float, float], Any]
-    ) -> Iterator[Tuple[int, int]]:
+    ) -> Iterator[Union[Tuple[int, int], int]]:
 
         if self._tile_is_blocked(*end_pos, collision_list_hash_map):
             print(1)

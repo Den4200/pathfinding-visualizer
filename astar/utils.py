@@ -17,7 +17,7 @@ def pixels_to_tile(x: float, y: float) -> Tuple[int, int]:
     )
 
 
-def find_grid_box(x, y):
+def find_grid_box(x: int, y: int) -> Tuple[float, float]:
     left_x = x - (x % Tile.SCALED)
     bottom_y = y - (y % Tile.SCALED)
 

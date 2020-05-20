@@ -9,7 +9,6 @@ class AStarVisualizer(View):
 
     def __init__(self, event_map: EventMap) -> None:
         super().__init__(event_map)
-
         self.grid = None
 
         arcade.set_background_color(arcade.color.WHITE)
@@ -25,7 +24,7 @@ class AStarVisualizer(View):
         self.grid.draw()
 
 
-def main():
+def main() -> None:
     window = arcade.Window(*s.WINDOW_SIZE, 'A* Pathfinding Visualizer')
     window.show_view(AStarVisualizer(EventMap()))
     arcade.run()
