@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from typing import Any, Dict, Optional, Tuple, Iterator, Union
 
 from astar import Settings as s, Tile
@@ -116,7 +117,7 @@ class PathFinder:
                 child.g = current_node.g + 1
 
                 n = child - end_node
-                child.h = n.pos[0] ** 2 + n.pos[1] ** 2
+                child.h = math.sqrt(n.pos[0] ** 2 + n.pos[1] ** 2)
 
                 child.f = child.g + child.h
 
